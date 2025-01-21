@@ -18,10 +18,13 @@ model User {
   email         String    @unique
   password      String
   is2FAEnabled  Boolean   @default(false)
+  is2FAVerified Boolean   @default(false)
   twoFAMethod   String?   // "email" ou "authenticator"
   twoFASecret   String?   // Clé secrète pour TOTP
   phoneNumber   String?
+  lastVerified  DateTime? // Nouveau champ pour suivre la dernière vérification
   trustedIPs    TrustedIP[]
+
 }
 
 model TrustedIP {
