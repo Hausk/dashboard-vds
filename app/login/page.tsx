@@ -3,8 +3,11 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Input } from "@heroui/input";
-import { Button } from "@heroui/button";
+import { Card, CardBody, CardHeader } from "@heroui/card";
+import { Divider } from "@heroui/divider";
+
+import { LoginForm } from "@/components/login/login-form";
+import { GoogleSignInButton } from "@/components/login/google-button";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -45,37 +48,20 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4 bg-gray-50">
-      <form className="w-full max-w-md space-y-4" onSubmit={handleLogin}>
-        {error && (
-          <div className="p-4 text-red-600 rounded-lg bg-red-50">{error}</div>
-        )}
-
-        <Input
-          required
-          label="Email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <Input
-          required
-          label="Mot de passe"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <Button
-          className="w-full"
-          color="primary"
-          isLoading={loading}
-          type="submit"
-        >
-          Se connecter
-        </Button>
-      </form>
+    <div className="flex items-center justify-center min-h-screen p-4 bg-gradient-to-br from-violet-600 to-pink-700">
+      <Card className="w-full p-4 space-y-4 rounded-lg max-w-[400px]">
+        <CardHeader className="text-center">Se connecter</CardHeader>
+        <CardBody className="text-center">
+          <LoginForm />
+          <div className="relative flex justify-between w-full gap-4 my-5">
+            <Divider className="w-full my-auto" />
+            <p className="absolute px-5 text-xs text-gray-500 -translate-x-1/2 -translate-y-1/2 bg-content1 top-1/2 left-1/2">
+              OU
+            </p>
+          </div>
+          <GoogleSignInButton />
+        </CardBody>
+      </Card>
     </div>
   );
 }

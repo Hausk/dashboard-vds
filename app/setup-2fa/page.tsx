@@ -8,6 +8,8 @@ import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card";
 import { Radio, RadioGroup } from "@heroui/radio";
 import { Button } from "@heroui/button";
 import { Input } from "@heroui/input";
+import { Alert } from "@heroui/alert";
+import { Snippet } from "@heroui/snippet";
 
 export default function Setup2FA() {
   const router = useRouter();
@@ -97,7 +99,7 @@ export default function Setup2FA() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4 bg-gray-50">
+    <div className="flex items-center justify-center min-h-screen p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="flex-col items-start px-6 pt-6 pb-0">
           <h1 className="text-2xl font-bold">Configuration de la 2FA</h1>
@@ -109,12 +111,6 @@ export default function Setup2FA() {
         </CardHeader>
 
         <CardBody className="px-6">
-          {error && (
-            <div className="p-4 mb-4 text-red-600 rounded-lg bg-red-50">
-              {error}
-            </div>
-          )}
-
           {step === "choose" && (
             <RadioGroup
               value={method}
@@ -157,7 +153,9 @@ export default function Setup2FA() {
                 <p className="mb-2 text-sm text-gray-600">
                   Clé secrète (en cas de problème avec le QR code) :
                 </p>
-                <code className="p-2 bg-gray-100 rounded">{secret}</code>
+                <Snippet hideSymbol className="p-2 rounded">
+                  {secret}
+                </Snippet>
               </div>
               <ol className="ml-4 space-y-2 list-decimal">
                 <li>
@@ -225,6 +223,11 @@ export default function Setup2FA() {
           )}
         </CardFooter>
       </Card>
+      {error && (
+        <Alert className="fixed w-auto bottom-2 right-5" color="danger">
+          {error}
+        </Alert>
+      )}
     </div>
   );
 }

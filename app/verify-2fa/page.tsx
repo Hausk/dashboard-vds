@@ -98,14 +98,14 @@ export default function Verify2FA() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4 bg-gray-50">
-      <Card className="w-full max-w-md">
+    <div className="flex items-center justify-center min-h-screen p-4">
+      <Card className="w-full max-w-[400px]">
         <CardHeader className="flex-col items-start px-6 pt-6 pb-0">
           <h1 className="text-2xl font-bold">Vérification 2FA</h1>
           <p className="mt-2 text-gray-600">
             {session?.user?.twoFAMethod === "email"
               ? "Entrez le code reçu par email"
-              : "Entrez le code de votre application d'authentification"}
+              : "Entrez le code affiché sur l'authenticator"}
           </p>
         </CardHeader>
 
@@ -116,7 +116,7 @@ export default function Verify2FA() {
             </div>
           )}
 
-          <div className="flex flex-col items-start gap-2">
+          <div className="flex flex-col items-start gap-2 m-auto">
             <InputOtp
               length={6}
               value={verificationCode}
